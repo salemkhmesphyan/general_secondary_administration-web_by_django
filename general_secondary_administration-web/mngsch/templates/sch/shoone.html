@@ -1,0 +1,124 @@
+{% extends 'styles.html' %}
+ {% block content %}
+{% if messages %}
+{% for msg in messages %}
+    <div class="alert alert-success alert-dismissable" aria-hidden="true" align="center">
+<button type="button" class="close" data-dismiss="alert">X</button>    
+    {{ msg}} </div>
+    {% endfor %}
+    {% endif %}
+
+<br>
+ <div class="container">
+<div class="row">
+<div class="col-md-6 alert alert-info">
+<h1 align="center">اضافة صف جديد</h1> 
+<hr>
+<form method="POST" action="addrow">{% csrf_token %}
+<table summary="" class="table table-striped table-bordered">
+<tr><td><input type="text" class="form-control  boblu" name="rownew" />:الصف الجديد</td><td><select class="form-control  boblu" name="rowname"><option>row1</option><option>row2</option><option>row3</option><option>row4</option><option>row5</option><option>row6</option><option>row7</option><option>row8</option><option>row9</option></select>:الصف</td></tr>
+
+</table>
+<input type="submit" class="btn btn-primary" value="اضافة صف جديد" />
+</form>
+</div>
+<div class="col-md-6 alert alert-info">
+
+<h1 align="center">اضافة طالب جديد</h1><hr>
+<form method="POST" action="chrow">{% csrf_token %}
+<table summary="" class="table table-striped table-bordered">
+<tr><td><input type="text" class="form-control boblu" name="nms" id="nms" required="" />:اسم الطالب الجديد</td><td><select class="form-control boblu" name="nar" id="nar" >
+{% if f1 %}
+{% for n in g %}
+<option value="{{n.roww}}">{{n.roww}}</option>
+{% endfor %}
+{% else %}
+{% for n in g %}
+<option value="{{n.roww}}">{{n.roww}}</option>
+{% endfor %}
+{% endif %}
+
+
+</select>:اسم الصف</td><td><select class="form-control  boblu" onchange="submit()" name="namrow" id="namrow" >
+{% if f2 %}
+<option value="{{f2}}">{{f2}}</option>
+{% endif %}
+<option>row1</option><option>row2</option><option>row3</option><option>row4</option><option>row5</option><option>row6</option><option>row7</option><option>row8</option><option>row9</option></select>:اسم الصف</td></tr>
+</table>
+<input type="submit" value="add" id="oo2" />
+</form>
+
+
+<form  method="POST" action="addstud">{% csrf_token %}
+<table id="oo" summary="" class="table table-striped table-bordered">
+<tr><td><input type="text" name="namestu" class="form-control  boblu" id="namestu" class="form-control" required="" />:namestud</td><td><input type="text" name="row" id="row" />:الصف</td><td><input type="text" name="namerow" id="namerow" />:اسم الصف</td></tr>
+
+</table>
+<input type="submit" class="btn btn-primary" value="اضافة طالب جديد"  />
+</form>
+</div></div></div>
+<script>
+var o1=$("#nms").val();
+
+var o2=$("#nar").val();
+var o3=$("#namrow").val();
+$("#oo,#oo2,#namestu,#row,#namerow").hide();
+$("#namestu").val(o1);
+$("#row").val(o2);
+$("#namerow").val(o3);
+$("#nms,#nar,#namrow").change(function () {
+var o1=$("#nms").val();
+var o2=$("#nar").val();
+var o3=$("#namrow").val();
+$("#namestu").val(o1);
+$("#row").val(o2);
+$("#namerow").val(o3);
+});
+/*$("#tybok2").change(function () {
+var o1=$("#tybok1").val();
+var o2=$("#tybok2").val();
+$("#q1").val(o1);
+$("#q2").val(o2);
+});
+*/
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<table summary="" >
+
+<tr><td>{{pro.su30}}</td><td>{{pro.test2}}</td><td>{{pro.sh2}}</td><td>{{pro.work2}}</td><td>{{pro.motabh2}}</td><td>{{pro.test1}}</td><td>{{pro.sh1}}</td><td>{{pro.work1}}</td><td>{{pro.motabh1}}</td></tr>
+</table>
+-->
+
+
+
+
+
+
+
+
+
+{% endblock content %}

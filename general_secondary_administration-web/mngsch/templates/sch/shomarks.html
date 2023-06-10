@@ -1,0 +1,165 @@
+{% extends 'styles.html' %}
+ {% block content %}
+{% if messages %}
+{% for msg in messages %}
+    <div class="alert alert-success alert-dismissable" aria-hidden="true" align="center">
+<button type="button" class="close" data-dismiss="alert">X</button>    
+    {{ msg}} </div>
+    {% endfor %}
+    {% endif %}
+
+
+<center>
+<div class="container">
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4 alert alert-info">
+<h1 align="center">عرض نتائج:{{termnow}}</h1>
+<hr>
+<form class="alert alert-info" method="POST" action="shoprod_helf" >{% csrf_token %}
+
+ <table summary="" class="table table-striped table-bordered">
+<tr><td>
+
+<fieldset>
+<input list="mylist" id="ns" class="form-control">
+<datalist id="mylist" >
+{% if u %}
+{% for d in i %}
+<option value="{{d.namst}}">{{d.namst}}</option>
+{% endfor %}
+{% endif %}
+<option>none</option>
+</datalist>:اسم الطالب</td><td><select class="form-control" name="nr" onchange="submit()" >
+{% if u %}
+<option value="{{rn}}">{{rn}}</option>
+{% else %}
+<option>none</option>
+{% endif %}
+{% for n in g %}
+<option value="{{n.roww}}">{{n.roww}}</option>
+{% endfor %}
+</select>:اسم الصف</fieldset></td></tr>
+ </table>
+ </form>
+</div><div class="col-md-4"></div></div>
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
+ <form class="alert alert-info" method="POST" action="shoprod_helf2" >{% csrf_token %}
+ <input type="text" name="gn" id="gn"  />
+ <input type="submit" class="btn btn-primary" value="عرض علامات الطالب" />
+ </form>
+ </div><div class="col-md-4"></div></div>
+ 
+{% if v %}
+ <div class="row">
+ <div class="col-md-1"></div>
+<div class="col-md-10">
+<table class="table table-striped table-bordered" >
+<tr><td colspan="7">الصف:{{nst}}</td><td colspan="7">اسم الطالب: {{rn}} </td></tr>
+<tr><td>((50))</td><td>((30))</td><td>((20))  </td><td>المواد</td></tr>
+{% for q in ii %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>قران</td></tr>
+{% endfor %}
+
+{% for q in ii2 %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>اسلامية</td></tr>
+{% endfor %}
+
+{% for q in ii3 %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>عربي</td></tr>
+{% endfor %}
+
+{% for q in ii4 %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>رياضيات</td></tr>
+{% endfor %}
+
+{% for q in ii5 %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>علوم</td></tr>
+{% endfor %}
+{% if ii6 %}
+{% for q in ii6 %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>اجتماعيات</td></tr>
+{% endfor %}
+{% endif %}
+{% if ii7 %}
+{% for q in ii7 %}
+<tr><td>{{q.su50}}</td><td>{{q.su30}}</td><td>{{q.su20}}</td><td>انجليزي</td></tr>
+{% endfor %}
+{% endif %}
+
+</table>
+</div><div class="col-md-1"></div></div>
+{% endif %}
+{% if c %}
+
+
+ <div class="row">
+ <div class="col-md-1"></div>
+<div class="col-md-10">
+<table class="table table-striped table-bordered" >
+<tr><td colspan="7">الصف:{{nst}}</td><td colspan="7">اسم الطالب: {{rn}} </td></tr>
+<tr><td>((100))</td><td>((50))</td><td>((50))  </td><td>المواد</td></tr>
+{% for q in oo1 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>قران</td></tr>
+{% endfor %}
+
+{% for q in oo2 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>اسلامية</td></tr>
+{% endfor %}
+
+{% for q in oo3 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>عربي</td></tr>
+{% endfor %}
+
+{% for q in oo4 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>رياضيات</td></tr>
+{% endfor %}
+
+{% for q in oo5 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>علوم</td></tr>
+{% endfor %}
+{% if oo6 %}
+{% for q in oo6 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>اجتماعيات</td></tr>
+{% endfor %}
+{% endif %}
+{% if oo7 %}
+{% for q in oo7 %}
+<tr><td>{{q.su100}}</td><td>{{q.ss50}}</td><td>{{q.fs50}}</td><td>انجليزي</td></tr>
+{% endfor %}
+{% endif %}
+
+</table>
+</div><div class="col-md-1"></div></div>
+
+
+
+
+
+
+
+
+
+{% endif %}
+</div>
+<script>
+
+var o1=$("#ns").val();
+$("#gn").hide();
+$("#gn").val(o1);
+$("#ns").change(function () {
+var o1=$("#ns").val();
+//$("#oo,#oo2,#namestu,#row,#namerow").hide();
+$("#gn").val(o1);
+});
+
+</script>
+
+
+
+
+
+
+{% endblock content %}

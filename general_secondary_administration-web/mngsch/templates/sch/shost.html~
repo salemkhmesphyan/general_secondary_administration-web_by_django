@@ -1,0 +1,127 @@
+{% extends 'styles.html' %}
+ {% block content %}
+ {% if messages %}
+{% for msg in messages %}
+    <div class="alert alert-success alert-dismissable" aria-hidden="true" align="center">
+<button type="button" class="close" data-dismiss="alert">X</button>    
+    {{ msg}} </div>
+    {% endfor %}
+    {% endif %}
+
+<br>
+ <h1 align="center">صفحة عرض علامات الطالب وتعديلها</h1>
+ <hr><br>
+ <div class="container">
+<div class="row">
+<div class="col-md-12 alert alert-info">
+ <form method="POST" action="shost2" >{% csrf_token %}
+ <table summary="" class="table table-striped table-bordered">
+<tr><td><select id="ns" class="form-control boblu">
+{% if u %}
+{% for d in i %}
+<option value="{{d.namst}}">{{d.namst}}</option>
+{% endfor %}
+{% endif %}
+<option>none</option>
+</select>:اسم الطالب</td><td><select class="form-control boblu" name="nr" onchange="submit()" >
+{% if u %}
+<option value="{{rn}}">{{rn}}</option>
+{% else %}
+<option>none</option>
+{% endif %}
+{% for n in g %}
+<option value="{{n.namerow1}}">{{n.namerow1}}</option>
+{% endfor %}
+{% if srow %}
+{% for n1 in srow %}
+<option value="{{n1.roww}}">{{n1.roww}}</option>
+{% endfor %}
+{% endif %}
+</select>:اسم الصف</td></tr>
+ </table>
+ </form>
+ </div></div>
+ <div class="row alert alert-info">
+<div class="col-md-6 alert alert-info">
+ <form class="text-center" method="POST" action="shost3" >{% csrf_token %}
+ <input type="text" name="gn" id="gn"  />
+ 
+ <input type="submit" class="btn btn-primary" value="عرض علامات الطالب" />
+ </form>
+ </div>
+ <div class="col-md-6 alert alert-info text-center">
+ <a href="{% url 'shost' %}" class="btn btn-primary " >اختيار صف اخر</a>
+ </div>
+ </div><hr>
+ <div class="row">
+<div class="col-md-12">
+<form class="alert alert-info"  method="POST" action="update1" >{% csrf_token %}
+ <table summary="" class="table table-striped table-bordered">
+
+<tr><td colspan="2">الصف<input type="text" name="nru" value="{{nst}}" class="form-control boblu" required /></td><input type="text" name="nrs" value="{{nst}}" class="form-control boblu" id="r2" required /><input type="text" name="nss" value="{{rn}}" id="ss2" required /> <td colspan="2" >اسم الطالب<input type="text" value="{{rn}}" name="nsu" class="form-control boblu" required /></td></tr>
+</table>
+
+<table summary="" class="table table-striped table-bordered table-hover table-dark" >
+
+<tr><td>((50))</td><td>((30))</td><td>((20))  </td><td>شهري2</td><td>شهري1</td><td>تحريري</td><td>2شفوي</td><td>واجبات</td><td>مواظبة</td><td>تحريري</td><td>شفوي1</td><td>واجبات</td><td>مواضبة</td><td>المواد</td></tr>
+{% for q in ii %}
+<tr><td><input type="text"  id="su50" class="form-control" value="{{q.su50}}" name="1su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="1su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control" name="1su20" required /> </td><td><input type="text" id="su30" value="{{q.s2}}" name="1s2" class="form-control" required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="1s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="1test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}" class="form-control" name="1sh2" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="1work2" class="form-control" required /></td><td><input type="text" id="mo2" name="1mo2" value="{{q.mo2}}" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="1test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="1sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="1work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="1mo1" class="form-control" required /></td><td>قران</td></tr>
+{% endfor %}
+
+{% for q in ii2 %}
+<tr><td><input type="text" id="su50" value="{{q.su50}}" class="form-control" name="2su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="2su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control" name="2su20"  required /> </td><td><input type="text" id="su30" value="{{q.s2}}" class="form-control" name="2s2" required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="2s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="2test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}" name="2sh2" class="form-control" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="2work2" class="form-control" required /></td><td><input type="text" id="mo2" value="{{q.mo2}}" name="2mo2" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="2test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="2sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="2work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="2mo1" class="form-control" required /></td><td>اسلامية</td></tr>
+{% endfor %}
+
+{% for q in ii3 %}
+<tr><td><input type="text" id="su50" value="{{q.su50}}" class="form-control" name="3su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="3su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control" name="3su20"  required /></td><td><input type="text" id="su30" value="{{q.s2}}" class="form-control" name="3s2" required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="3s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="3test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}"  name="3sh2" class="form-control" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="3work2" class="form-control" required /></td><td><input type="text" id="mo2" value="{{q.mo2}}" name="3mo2" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="3test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="3sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="3work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="3mo1" class="form-control" required /></td><td>عربي</td></tr>
+{% endfor %}
+
+{% for q in ii4 %}
+<tr><td><input type="text" id="su50" value="{{q.su50}}" class="form-control" name="4su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="4su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control" name="4su20"  required /></td><td><input type="text" id="su30" value="{{q.s2}}" class="form-control" name="4s2"  required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="4s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="4test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}"  name="4sh2" class="form-control" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="4work2" class="form-control" required /></td><td><input type="text" id="mo2" value="{{q.mo2}}" name="4mo2" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="4test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="4sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="4work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="4mo1" class="form-control" required /></td><td>رياضيات</td></tr>
+{% endfor %}
+
+{% for q in ii5 %}
+<tr><td><input type="text" id="su50" value="{{q.su50}}" class="form-control" name="5su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="5su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control"  name="5su20"  required /></td><td><input type="text" id="su30" value="{{q.s2}}" class="form-control" name="5s2"  required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="5s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="5test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}"  name="5sh2" class="form-control" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="5work2" class="form-control" required /></td><td><input type="text" id="mo2" value="{{q.mo2}}" name="5mo2" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="5test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="5sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="5work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="5mo1" class="form-control" required /></td><td>علوم</td></tr>
+{% endfor %}
+{% if ii6 %}
+{% for q in ii6 %}
+<tr><td><input type="text" id="su50" value="{{q.su50}}" class="form-control" name="6su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="6su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control"  name="6su20"  required /></td><td><input type="text" id="su30" value="{{q.s2}}" class="form-control" name="6s2"  required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="6s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="6test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}"  name="6sh2" class="form-control" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="6work2" class="form-control" required /></td><td><input type="text" id="mo2" value="{{q.mo2}}" name="6mo2" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="6test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="6sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="6work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="6mo1" class="form-control" required /></td><td>اجتماعيات</td></tr>
+{% endfor %}
+{% endif %}
+{% if ii7 %}
+{% for q in ii7 %}
+<tr><td><input type="text" id="su50" value="{{q.su50}}" class="form-control" name="7su50" required /></td><td><input type="text" id="su30" value="{{q.su30}}" name="7su30" class="form-control" required /></td><td><input type="text"  value="{{q.su20}}" class="form-control"  name="7su20"  required /></td><td><input type="text" id="su30" value="{{q.s2}}" class="form-control" name="7s2"  required /></td><td><input type="text" id="su30" value="{{q.s1}}" name="7s1" class="form-control" required /></td><td><input type="text" id="test2" value="{{q.test2}}" name="7test2" class="form-control" required /></td><td><input type="text" id="sh2" value="{{q.sh2}}"  name="7sh2" class="form-control" required /></td><td><input type="text" id="work2" value="{{q.work2}}" name="7work2" class="form-control" required /></td><td><input type="text" id="mo2" value="{{q.mo2}}" name="7mo2" class="form-control" required /></td><td><input type="text" id="test1" value="{{q.test1}}" name="7test1" class="form-control" required /></td><td><input type="text" id="sh1" value="{{q.sh1}}" name="7sh1" class="form-control" required /></td><td><input type="text" id="work1" value="{{q.work1}}" name="7work1" class="form-control" required /></td><td><input type="text" id="mo1" value="{{q.mo1}}" name="7mo1" class="form-control" required /></td><td>انجليزي</td></tr>
+{% endfor %}
+{% endif %}
+
+</table>
+<input type="submit" class="btn btn-primary" value="update" />
+</form>
+</div></div></div>
+<script>
+/*
+{% for q in ii %}
+$("#mo1").val({{q.mo1}});
+$("#work1").val({{q.work1}});
+$("#sh1").val({{q.sh1}});
+$("#test1").val({{q.test1}});
+$("#mo2").val({{q.mo2}});
+$("#work2").val({{q.work2}});
+$("#sh2").val({{q.sh2}});
+$("#test2").val({{q.test2}});
+$("#su30").val({{q.su30}});
+{% endfor %}*/
+var o1=$("#ns").val();
+$("#gn,#r2,#ss2").hide();
+$("#gn").val(o1);
+$("#ns").change(function () {
+var o1=$("#ns").val();
+//$("#oo,#oo2,#namestu,#row,#namerow").hide();
+$("#gn").val(o1);
+});
+
+</script>
+
+
+
+{% endblock content %}
